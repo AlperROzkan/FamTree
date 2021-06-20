@@ -1,7 +1,6 @@
 ﻿// FamTree.cpp : définit le point d'entrée de l'application.
 //
-
-#include "FamTree.h"
+#include <iostream>
 
 using namespace std;
 
