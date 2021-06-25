@@ -29,6 +29,9 @@ Person::Person(std::string firstname, std::string lastname, Gender gender)
 		this->gender = "other";
 		break;
 	}
+	//this->relation = Relations();
+
+	id++;
 }
 
 Person::Person(std::string firstname, std::string lastname, std::string gender)

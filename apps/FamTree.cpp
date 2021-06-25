@@ -5,6 +5,8 @@
 
 using namespace std;
 
+unsigned int Person::id = 0; 
+
 int main()
 {
 	Person pers = Person();

@@ -9,13 +9,17 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <map>
+
 #include "gender.hpp"
 #include "relation.hpp"
+
+typedef std::map<int, int> Relations;
 
 class Person
 {
 public:
-	// static unsigned int id; // static id to keep track of the number of people
+	static unsigned int id; // static id to keep track of the number of people
 	unsigned int id_person; // id of the person
 
 	// Default constructor
@@ -52,6 +56,7 @@ private:
 	std::string lastname;
 	// a person can specify the gender themselves, or can choose it from a list
 	std::string gender;
+	Relations relation;
 };
 
 #endif // !PERSON_HPP
