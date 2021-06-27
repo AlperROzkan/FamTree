@@ -20,4 +20,4 @@ enum class Relation
 	other
 };
 
-#endif
+#endif // !RELATION_HPP 

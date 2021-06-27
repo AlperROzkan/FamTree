@@ -1,21 +1,14 @@
-cmake_minimum_required(VERSION 3.17.0)
+cmake_minimum_required(VERSION 3.17...3.20)
 
 # Project description
-project (FamTree 
+project(
+	FamTree 
 	VERSION 0.1.0
 	DESCRIPTION "Family genealogy management with cpp"
 	LANGUAGES CXX
 )
 
-# Add test support
-include(CTest)
-enable_testing()
-
-# add_executable(FamTree main.cpp)
-
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Source code here
 add_subdirectory(src)
@@ -24,5 +17,7 @@ add_subdirectory(src)
 add_subdirectory(apps)
 
 # Tests here
-# add_subdirectory(tests)
-
+include(CTest)
+include(GoogleTest)
+add_subdirectory("${CMAKE_SOURCE_DIR}/extern/googletest")
+add_subdirectory(tests)

@@ -29,8 +29,8 @@ Person::Person(std::string firstname, std::string lastname, Gender gender)
 		this->gender = "other";
 		break;
 	}
-	//this->relation = Relations();
-
+	this->relation = Relations();
+	this->id_person = id;
 	id++;
 }
 
@@ -80,4 +80,16 @@ std::ostream& operator<<(std::ostream& os, Person& person)
 	os << "lastname : " << person.lastname << std::endl;
 	os << "gender : " << person.gender << std::endl;
 	return os;
+}
+
+std::string Person::getFirstname() {
+	return this->firstname;
+}
+
+std::string Person::getLastname() {
+	return this->lastname;
+}
+
+std::string Person::getGender() {
+	return this->gender;
 }

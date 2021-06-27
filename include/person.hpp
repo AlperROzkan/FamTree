@@ -51,6 +51,15 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, Person& person);
 
+	// Firstname getter
+	std::string getFirstname();
+
+	// Lastname getter
+	std::string getLastname();
+
+	// Gender getter
+	std::string getGender();
+
 private:
 	std::string firstname;
 	std::string lastname;
