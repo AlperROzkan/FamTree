@@ -29,7 +29,7 @@ Person::Person(std::string firstname, std::string lastname, Gender gender)
 		this->gender = "other";
 		break;
 	}
-	this->relation = Relations();
+	//this->relations = std::map<Relation, std::set<Person>>();
 	this->id_person = id;
 	id++;
 }
@@ -92,4 +92,32 @@ std::string Person::getLastname() {
 
 std::string Person::getGender() {
 	return this->gender;
+}
+
+std::map<Relation, std::set<Person*>> Person::getRelations() {
+	return this->relations;
+}
+
+
+void Person::addRelation(Relation relation, Person* person) {
+	this->relations[relation].insert(person);
+}
+
+void Person::addParent(Person* person) {
+	this->addRelation(Relation::parent, person);
+}
+
+void Person::addChild(Person* person) {
+	this->addRelation(Relation::child, person);
+}
+
+std::set<Person*> Person::getParents() {
+	return this->relations[Relation::parent];
+}
+
+void Person::printSet(Relation relation) {
+	for each (auto var in this->relations[Relation::parent])
+	{
+		std::cout << var->getFirstname() << std::endl;
+	}
 }

@@ -8,36 +8,40 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
-#include <vector>
+#include <set>
 #include <map>
 
 #include "gender.hpp"
 #include "relation.hpp"
 
-typedef std::map<int, int> Relations;
-
 class Person
 {
 public:
+	/// Attributes
 	static unsigned int id; // static id to keep track of the number of people
 	unsigned int id_person; // id of the person
 
+	/// Methods
 	// Default constructor
 	Person();
 
 	// Destructor
 	~Person();
 
-	// Initializes the Person with a firstname, lastname and a specified gender from a Gender enumeration.
-	// firstname : The firstname of the Person.
-	// lastname : The lastname of the Person.
-	// gender : The gender of a person. Specified in an enumeration
+	/// <summary>
+	/// Constructor with a gender enum
+	/// </summary>
+	/// <param name="firstname">The firstname of the Person.</param>
+	/// <param name="lastname">The lastname of the Person.</param>
+	/// <param name="gender">The gender of a person. Specified in an enumeration.</param>
 	Person(std::string firstname, std::string lastname, Gender gender);
 
-	// Initializes the Person with a firstname, lastname and a specified gender from a Gender string. 
-	// firstname : The firstname of the Person.
-	// lastname : The lastname of the Person.
-	// gender : The gender of a person.
+	/// <summary>
+	/// Initializes the Person with a firstname, lastname and a specified gender from a Gender string. 
+	/// </summary>
+	/// <param name="firstname">The firstname of the Person.</param>
+	/// <param name="lastname">The lastname of the Person.</param>
+	/// <param name="gender">The gender of a person.</param>
 	Person(std::string firstname, std::string lastname, std::string gender);
 
 	// Copy Constructor
@@ -48,7 +52,6 @@ public:
 
 	Person& operator=(const Person&);
 	Person& operator=(Person&&) noexcept;
-
 	friend std::ostream& operator<<(std::ostream& os, Person& person);
 
 	// Firstname getter
@@ -60,12 +63,48 @@ public:
 	// Gender getter
 	std::string getGender();
 
+	// Relations getter
+	std::map<Relation, std::set<Person*>> getRelations();
+
+	/// <summary>
+	/// Adds a father to this person 
+	/// </summary>
+	/// <param name="person">Father to this person</param>
+	void addParent(Person* person);
+
+	/// <summary>
+	/// Adds a child to this person
+	/// </summary>
+	/// <param name="person">Child to this person</param>
+	void addChild(Person* person);
+
+	/// <summary>
+	/// Gets the parents of this person
+	/// </summary>
+	/// <returns>A set containing the parents (or parent) of this person</returns>
+	std::set<Person*> getParents();
+
+	/// <summary>
+	/// Prints the sets concerned
+	/// </summary>
+	/// <param name="relation">The relation whose set must prints</param>
+	void printSet(Relation relation);
+
 private:
+	/// Attributes
 	std::string firstname;
 	std::string lastname;
-	// a person can specify the gender themselves, or can choose it from a list
-	std::string gender;
-	Relations relation;
+	std::string gender; // a person can specify the gender themselves, or can choose it from a list
+	std::map<Relation, std::set<Person*>> relations;
+
+	/// Methods
+
+	/// <summary>
+	/// Adds a relation with a person to this person
+	/// </summary>
+	/// <param name="relation">The relationship with the person</param>
+	/// <param name="person">The person linked to this person</param>
+	void addRelation(Relation relation, Person* person);
 };
 
 #endif // !PERSON_HPP

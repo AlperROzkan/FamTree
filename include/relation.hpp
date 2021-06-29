@@ -4,19 +4,15 @@
 #pragma once
 enum class Relation
 {
-	grandFather,
-	grandMother,
-	father,
-	mother,
-	sister,
-	brother,
+	grandParent,
+	parent,
+	stepParent,
+	child,
+	stepChild,
+	sibling,
+	stepSibling,
+	halfSibling,
 	cousin,
-	stepBrother,
-	stepSister,
-	halfBrother,
-	halfSister,
-	stepFather,
-	stepMother,
 	other
 };
 
