@@ -79,10 +79,10 @@ public:
 	void addChild(Person* person);
 
 	/// <summary>
-	/// Gets the parents of this person
+	/// Gets the specific relation of this person
 	/// </summary>
-	/// <returns>A set containing the parents (or parent) of this person</returns>
-	std::set<Person*> getParents();
+	/// <returns>A set containing the specific relation of this person</returns>
+	std::set<Person*> getSpecificRelation(Relation relation);
 
 	/// <summary>
 	/// Prints the sets concerned

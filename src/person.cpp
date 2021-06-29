@@ -105,18 +105,20 @@ void Person::addRelation(Relation relation, Person* person) {
 
 void Person::addParent(Person* person) {
 	this->addRelation(Relation::parent, person);
+	person->addRelation(Relation::child, this);
 }
 
 void Person::addChild(Person* person) {
 	this->addRelation(Relation::child, person);
+	person->addRelation(Relation::parent, this);
 }
 
-std::set<Person*> Person::getParents() {
-	return this->relations[Relation::parent];
+std::set<Person*> Person::getSpecificRelation(Relation relation) {
+	return this->relations[relation];
 }
 
 void Person::printSet(Relation relation) {
-	for each (auto var in this->relations[Relation::parent])
+	for each (auto var in this->relations[relation])
 	{
 		std::cout << var->getFirstname() << std::endl;
 	}
