@@ -98,11 +98,6 @@ std::map<Relation, std::set<Person*>> Person::getRelations() {
 	return this->relations;
 }
 
-
-void Person::addRelation(Relation relation, Person* person) {
-	this->relations[relation].insert(person);
-}
-
 void Person::addParent(Person* person) {
 	this->addRelation(Relation::parent, person);
 	person->addRelation(Relation::child, this);
@@ -113,8 +108,9 @@ void Person::addChild(Person* person) {
 	person->addRelation(Relation::parent, this);
 }
 
-std::set<Person*> Person::getSpecificRelation(Relation relation) {
-	return this->relations[relation];
+void Person::addSpouse(Person* person) {
+	this->addRelation(Relation::spouse, person);
+	person->addRelation(Relation::spouse, this);
 }
 
 void Person::printSet(Relation relation) {
@@ -122,4 +118,24 @@ void Person::printSet(Relation relation) {
 	{
 		std::cout << var->getFirstname() << std::endl;
 	}
+}
+
+std::set<Person*> Person::getParents() {
+	return this->getSpecificRelation(Relation::parent);
+}
+
+std::set<Person*> Person::getChildren() {
+	return this->getSpecificRelation(Relation::child);
+}
+
+std::set<Person*> Person::getSpouse() {
+	return this->getSpecificRelation(Relation::spouse);
+}
+
+void Person::addRelation(Relation relation, Person* person) {
+	this->relations[relation].insert(person);
+}
+
+std::set<Person*> Person::getSpecificRelation(Relation relation) {
+	return this->relations[relation];
 }

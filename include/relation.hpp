@@ -10,6 +10,7 @@ enum class Relation
 	child,
 	stepChild,
 	sibling,
+	spouse,
 	stepSibling,
 	halfSibling,
 	cousin,

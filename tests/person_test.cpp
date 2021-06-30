@@ -8,6 +8,10 @@ unsigned int Person::id = 0;
 class PersonTest : public testing::Test {
 protected:
 	Person* johnDoe = new Person("John", "Doe", Gender::other);
+	Person* jackDoe = new Person("Jack", "Doe", Gender::male);
+	Person* janePoe = new Person("Jane", "Poe", Gender::female);
+	Person* paulDoe = new Person("Paul", "Poe", Gender::male);
+	
 	virtual void SetUp() override {
 
 	}
@@ -24,8 +28,19 @@ TEST_F(PersonTest, PersonInstanciate1) {
 }
 
 TEST_F(PersonTest, PersonAddParent1) {
-	Person* jackDoe = new Person("Jack", "Doe", Gender::male);
 	johnDoe->addParent(jackDoe);
-	EXPECT_TRUE(johnDoe->getSpecificRelation(Relation::parent).contains(jackDoe));
-	EXPECT_TRUE(jackDoe->getSpecificRelation(Relation::child).contains(johnDoe));
-} 
+	EXPECT_TRUE(johnDoe->getParents().contains(jackDoe));
+	EXPECT_TRUE(jackDoe->getChildren().contains(johnDoe));
+}
+
+TEST_F(PersonTest, PersonAddChildren1) {
+	janePoe->addChild(paulDoe);
+	EXPECT_TRUE(janePoe->getChildren().contains(paulDoe));
+	EXPECT_TRUE(paulDoe->getParents().contains(janePoe));
+}
+
+TEST_F(PersonTest, PersonAddSpouse1) {
+	janePoe->addSpouse(johnDoe);
+	EXPECT_TRUE(johnDoe->getSpouse().contains(janePoe));
+	EXPECT_TRUE(janePoe->getSpouse().contains(johnDoe));
+}

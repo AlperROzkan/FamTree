@@ -79,16 +79,34 @@ public:
 	void addChild(Person* person);
 
 	/// <summary>
-	/// Gets the specific relation of this person
+	/// Adds a spouse to this person
 	/// </summary>
-	/// <returns>A set containing the specific relation of this person</returns>
-	std::set<Person*> getSpecificRelation(Relation relation);
+	/// <param name="person">Spouse of this person</param>
+	void addSpouse(Person* person);
 
 	/// <summary>
 	/// Prints the sets concerned
 	/// </summary>
 	/// <param name="relation">The relation whose set must prints</param>
 	void printSet(Relation relation);
+
+	/// <summary>
+	/// Gets the parents of this person
+	/// </summary>
+	/// <returns></returns>
+	std::set<Person*> getParents();
+
+	/// <summary>
+	/// Gets the children of this person 
+	/// </summary>
+	/// <returns></returns>
+	std::set<Person*> getChildren();
+
+	/// <summary>
+	/// Gets the spouse of this person
+	/// </summary>
+	/// <returns></returns>
+	std::set<Person*> getSpouse();
 
 private:
 	/// Attributes
@@ -105,6 +123,12 @@ private:
 	/// <param name="relation">The relationship with the person</param>
 	/// <param name="person">The person linked to this person</param>
 	void addRelation(Relation relation, Person* person);
+
+	/// <summary>
+	/// Gets the specific relation of this person
+	/// </summary>
+	/// <returns>A set containing the specific relation of this person</returns>
+	std::set<Person*> getSpecificRelation(Relation relation);
 };
 
 #endif // !PERSON_HPP
