@@ -341,3 +341,4 @@ healthchecksdb
 /build
 /out/build
 /CMakeSettings.json
+/out/install/x64-Debug

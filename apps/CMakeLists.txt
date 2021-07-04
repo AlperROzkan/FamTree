@@ -1,16 +1,16 @@
 add_executable(
-	FamTree 
-	"FamTree.cpp"
+	FamTreeCmd
+	"FamTreeCmd.cpp"
 )
 
 target_compile_features(
-	FamTree 
+	FamTreeCmd 
 	PRIVATE 
 	cxx_std_17
 )
 
 target_link_libraries(
-	FamTree 
+	FamTreeCmd 
 	PRIVATE 
 	fam_tree
 )

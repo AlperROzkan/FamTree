@@ -98,9 +98,10 @@ std::map<Relation, std::set<Person*>> Person::getRelations() {
 	return this->relations;
 }
 
-void Person::addParent(Person* person) {
-	this->addRelation(Relation::parent, person);
-	person->addRelation(Relation::child, this);
+void Person::addParent(Person* parent) {
+	// Add corresponding relations to each of the people involved
+	this->addRelation(Relation::parent, parent);
+	parent->addRelation(Relation::child, this);
 }
 
 void Person::addChild(Person* person) {
@@ -130,6 +131,10 @@ std::set<Person*> Person::getChildren() {
 
 std::set<Person*> Person::getSpouse() {
 	return this->getSpecificRelation(Relation::spouse);
+}
+
+std::string Person::printPerson() {
+	return "---\n" + this->firstname + "\n" + this->lastname + "\n" + this->gender + "\n---";
 }
 
 void Person::addRelation(Relation relation, Person* person) {

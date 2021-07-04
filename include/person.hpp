@@ -69,8 +69,8 @@ public:
 	/// <summary>
 	/// Adds a father to this person 
 	/// </summary>
-	/// <param name="person">Father to this person</param>
-	void addParent(Person* person);
+	/// <param name="parent">Father to this person</param>
+	void addParent(Person* parent);
 
 	/// <summary>
 	/// Adds a child to this person
@@ -107,6 +107,11 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	std::set<Person*> getSpouse();
+
+	/// <summary>
+	/// Prints a person 
+	/// </summary>
+	std::string printPerson();
 
 private:
 	/// Attributes
