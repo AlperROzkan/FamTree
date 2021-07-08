@@ -14,6 +14,7 @@ enum class Relation
 	stepSibling,
 	halfSibling,
 	cousin,
+	error,
 	other
 };
 

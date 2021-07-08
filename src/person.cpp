@@ -134,7 +134,10 @@ std::set<Person*> Person::getSpouse() {
 }
 
 std::string Person::printPerson() {
-	return "---\n" + this->firstname + "\n" + this->lastname + "\n" + this->gender + "\n---";
+	std::string str;
+	str = "\n---\n" + this->firstname + "\n" + this->lastname + "\n" + this->gender + "\n---\n";
+	
+	return str;
 }
 
 void Person::addRelation(Relation relation, Person* person) {
