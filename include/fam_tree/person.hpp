@@ -10,9 +10,8 @@
 #include <algorithm>
 #include <set>
 #include <map>
-
-#include "gender.hpp"
-#include "relation.hpp"
+#include <fam_tree/gender.hpp>
+#include <fam_tree/relation.hpp>
 
 class Person
 {
@@ -112,6 +111,18 @@ public:
 	/// Prints a person 
 	/// </summary>
 	std::string printPerson();
+
+	/// <summary>
+	/// Saves a person.
+	/// </summary>
+	/// <typeparam name="Ar"></typeparam>
+	/// <param name="ar"></param>
+	/// <param name="p"></param>
+	template<typename Ar>
+	void serialize(Ar& ar, const Person& p);
+
+	template<typename Ar>
+	void serialize(Ar& ar, Person& p);
 
 private:
 	/// Attributes

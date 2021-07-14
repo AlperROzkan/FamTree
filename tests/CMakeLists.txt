@@ -8,4 +8,6 @@ target_link_libraries(
   gtest_main
 )
 
+include_directories("${INCLUDES}")
+
 gtest_discover_tests(person_test)

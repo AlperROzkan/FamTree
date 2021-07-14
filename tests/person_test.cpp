@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include <set>
-#include "../include/person.hpp"
+#include <fam_tree/person.hpp>
 
 unsigned int Person::id = 0;
 

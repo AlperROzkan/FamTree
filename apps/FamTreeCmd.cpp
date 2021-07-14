@@ -1,12 +1,25 @@
 ﻿// FamTreeCmd.cpp : Command line app for family genealogy management
 #include <iostream>
 #include <vector>
-#include "person.hpp"
+#include <fam_tree/person.hpp>
 
 using namespace std;
 
 unsigned int Person::id = 0;
 
+string displayPeople(vector<Person*> people) {
+	// Counter
+	int count = 1;
+
+	// string to return
+	string strReturn;
+
+	for (auto value : people) {
+		strReturn = strReturn + to_string(count) + " : " + value->printPerson();
+		count++;
+	}
+	return strReturn;
+}
 
 int main()
 {
@@ -22,16 +35,13 @@ int main()
 	string gender;
 
 	// Relationship to add between the two people (choice 2)
-	Relation relationLink = Relation::error; 
+	Relation relationLink = Relation::error;
 
 	// Main vector of people, everyone will be stocked in this vector
 	vector<Person*> people;
 
 	// Another vector, to help add relationships
 	vector<Person*> helperVec;
-
-	// Counter
-	int count;
 
 	while (true) {
 		cout << "FamTree:" << endl;
@@ -67,15 +77,11 @@ int main()
 			cout << endl;
 			break;
 		case 2:
-			count = 0;
 			/* Add a relation between two people */
 			cout << "Add a relation between two people" << endl;
 
 			// Display everyone 
-			for (auto value : people) {
-				std::cout << count << " : " << value->printPerson();
-				count++;
-			}
+			cout << displayPeople(people) << endl;
 
 			// Choose the link type between the two people
 			cout << "Choose the relationship between the two people (Careful : The order is important)" << endl;
@@ -108,7 +114,7 @@ int main()
 					break;
 				}
 			}
-			
+
 			// Choose the first person to link
 			cout << "Choose the first person : " << endl;
 			cin >> input;
@@ -120,43 +126,32 @@ int main()
 			helperVec.push_back(people[input]);
 
 			// Match relationLink with the related action
+
 			switch (relationLink)
 			{
-			case Relation::grandParent:
-				break;
 			case Relation::parent:
 				helperVec[0]->addChild(helperVec[1]);
-				break;
-			case Relation::stepParent:
-				break;
-			case Relation::child:
-				break;
-			case Relation::stepChild:
-				break;
-			case Relation::sibling:
 				break;
 			case Relation::spouse:
 				helperVec[0]->addSpouse(helperVec[1]);
 				break;
-			case Relation::stepSibling:
-				break;
-			case Relation::halfSibling:
-				break;
-			case Relation::cousin:
-				break;
 			case Relation::error:
 				cout << "An error happened, aborting" << endl;
-				break;
-			case Relation::other:
 				break;
 			default:
 				break;
 			}
+
 			break;
 		case 3:
-			for (auto value : people) {
-				std::cout << value->printPerson();
-			}
+			/* Prints all the people */
+			std::cout << displayPeople(people);
+			break;
+		case 4:
+			/* Save the people in a file */
+			break;
+		case 5:
+			/* Load the people from a file */
 			break;
 		default:
 			return 0;

@@ -1,21 +1,15 @@
-set(HEADER_LIST 
-	"${CMAKE_SOURCE_DIR}/include/gender.hpp"
-	"${CMAKE_SOURCE_DIR}/include/relation.hpp"
-	"${CMAKE_SOURCE_DIR}/include/person.hpp"
-)
+include_directories("${INCLUDES}")
 
 # make library
 add_library(
 	fam_tree 
 	person.cpp 
-	${HEADER_LIST}
 )
 
 # share lib
 target_include_directories(
 	fam_tree 
-	PUBLIC 
-	"${CMAKE_SOURCE_DIR}/include"
+	PUBLIC "${CMAKE_SOURCE_DIR}/include"
 )
 
 # compile requirements

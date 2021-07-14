@@ -1,5 +1,4 @@
-#include "person.hpp"
-#include "gender.hpp"
+#include <fam_tree/person.hpp>
 #include <string>
 #include <variant>
 
