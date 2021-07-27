@@ -13,4 +13,5 @@ target_link_libraries(
 	FamTreeCmd 
 	PRIVATE 
 	fam_tree
+	nlohmann_json::nlohmann_json
 )

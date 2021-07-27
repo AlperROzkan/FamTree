@@ -1,9 +1,13 @@
 ﻿// FamTreeCmd.cpp : Command line app for family genealogy management
 #include <iostream>
+#include <iomanip>
 #include <vector>
-#include <fam_tree/person.hpp>
+#include <person.hpp>
+#include "nlohmann/json.hpp"
 
 using namespace std;
+using json = nlohmann::json;
+
 
 unsigned int Person::id = 0;
 
@@ -22,6 +26,40 @@ string displayPeople(vector<Person*> people) {
 }
 
 int main()
+{
+	// create a JSON object
+	json j =
+	{
+		{"pi", 3.141},
+		{"happy", true},
+		{"name", "Niels"},
+		{"nothing", nullptr},
+		{
+			"answer", {
+				{"everything", 42}
+			}
+		},
+		{"list", {1, 0, 2}},
+		{
+			"object", {
+				{"currency", "USD"},
+				{"value", 42.99}
+			}
+		}
+	};
+
+	// add new values
+	j["new"]["key"]["value"] = { "another", "list" };
+
+	// count elements
+	auto s = j.size();
+	j["size"] = s;
+
+	// pretty print with indent of 4 spaces
+	std::cout << std::setw(4) << j << '\n';
+}
+
+int main1()
 {
 	// Input to make a choice in the workflow 
 	int input;

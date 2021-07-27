@@ -12,12 +12,18 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Include directories
-set(INCLUDES
-	"${CMAKE_SOURCE_DIR}/include/")
+# Includes
+set(INCLUDE_DIR
+	"/include/"
+)
+
+# Serialize library
+set(JSON_BuildTests OFF CACHE INTERNAL "")
+add_subdirectory("./extern/json")
 
 # Source code here
-add_subdirectory(src)
+add_subdirectory("./include/fam_tree/")
+#add_subdirectory(src)
 
 # Executable code here
 add_subdirectory(apps)
@@ -25,7 +31,7 @@ add_subdirectory(apps)
 # Tests here
 include(CTest)
 include(GoogleTest)
-add_subdirectory("${CMAKE_SOURCE_DIR}/extern/googletest")
+add_subdirectory("./extern/googletest")
 add_subdirectory(tests)
 
 

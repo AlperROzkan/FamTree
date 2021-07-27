@@ -1,15 +1,20 @@
-include_directories("${INCLUDES}")
-
 # make library
 add_library(
 	fam_tree 
-	person.cpp 
+	"../../src/person.cpp"
 )
 
 # share lib
 target_include_directories(
 	fam_tree 
-	PUBLIC "${CMAKE_SOURCE_DIR}/include"
+	PUBLIC 
+	"./"
+)
+
+target_link_libraries(
+	fam_tree 
+	PRIVATE 
+	nlohmann_json::nlohmann_json
 )
 
 # compile requirements

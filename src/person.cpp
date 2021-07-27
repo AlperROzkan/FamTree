@@ -1,6 +1,4 @@
-#include <fam_tree/person.hpp>
-#include <string>
-#include <variant>
+#include <person.hpp>
 
 Person::Person() : Person("John", "Doe", Gender::other)
 {
@@ -135,8 +133,23 @@ std::set<Person*> Person::getSpouse() {
 std::string Person::printPerson() {
 	std::string str;
 	str = "\n---\n" + this->firstname + "\n" + this->lastname + "\n" + this->gender + "\n---\n";
-	
+
 	return str;
+}
+
+json Person::serializeSimplePerson()
+{
+	json j;
+	// Simple attributes
+	j["firstname"] = this->firstname;
+	j["lastname"] = this->lastname;
+	j["gender"] = this->gender;
+	return j;
+}
+
+Person* Person::deserializeSimplePerson(json j)
+{
+	return new Person(j["firstname"].get<std::string>(), j["lastname"].get<std::string>(), j["gender"].get<std::string>());
 }
 
 void Person::addRelation(Relation relation, Person* person) {

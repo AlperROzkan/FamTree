@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include <set>
-#include <fam_tree/person.hpp>
+#include <person.hpp>
 
 unsigned int Person::id = 0;
 
@@ -11,9 +11,12 @@ protected:
 	Person* jackDoe = new Person("Jack", "Doe", Gender::male);
 	Person* janePoe = new Person("Jane", "Poe", Gender::female);
 	Person* paulDoe = new Person("Paul", "Poe", Gender::male);
-	
-	virtual void SetUp() override {
+	json jsonJohnDoe;
 
+	virtual void SetUp() override {
+		jsonJohnDoe["firstname"] = "John";
+		jsonJohnDoe["lastname"] = "Doe";
+		jsonJohnDoe["gender"] = "Male";
 	}
 
 	virtual void TearDown() override {
@@ -43,4 +46,26 @@ TEST_F(PersonTest, PersonAddSpouse1) {
 	janePoe->addSpouse(johnDoe);
 	EXPECT_TRUE(johnDoe->getSpouse().contains(janePoe));
 	EXPECT_TRUE(janePoe->getSpouse().contains(johnDoe));
+}
+
+TEST_F(PersonTest, PersonSerialize1) {
+	json j = johnDoe->serializeSimplePerson();
+	EXPECT_EQ(j["firstname"], johnDoe->getFirstname());
+	EXPECT_EQ(j["lastname"], johnDoe->getLastname());
+	EXPECT_EQ(j["gender"], johnDoe->getGender());
+}
+
+TEST_F(PersonTest, PersonDeserialize1) {
+	Person* p = Person::deserializeSimplePerson(jsonJohnDoe);
+	EXPECT_EQ(jsonJohnDoe["firstname"], p->getFirstname());
+	EXPECT_EQ(jsonJohnDoe["lastname"], p->getLastname());
+	EXPECT_EQ(jsonJohnDoe["gender"], p->getGender());
+}
+
+TEST_F(PersonTest, PersonSerDeSimplePerson1) {
+	json j = johnDoe->serializeSimplePerson();
+	Person* p = Person::deserializeSimplePerson(j);
+	EXPECT_EQ(p->getFirstname(), johnDoe->getFirstname());
+	EXPECT_EQ(p->getLastname(), johnDoe->getLastname());
+	EXPECT_EQ(p->getGender(), johnDoe->getGender());
 }

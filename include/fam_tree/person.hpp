@@ -10,8 +10,16 @@
 #include <algorithm>
 #include <set>
 #include <map>
-#include <fam_tree/gender.hpp>
-#include <fam_tree/relation.hpp>
+#include <string>
+#include <variant>
+#include <filesystem>
+#include <nlohmann/json.hpp>
+
+#include "gender.hpp"
+#include "relation.hpp"
+
+namespace fs = std::filesystem;
+using json = nlohmann::json;
 
 class Person
 {
@@ -113,16 +121,17 @@ public:
 	std::string printPerson();
 
 	/// <summary>
-	/// Saves a person.
+	/// Serialize this person without relations
 	/// </summary>
-	/// <typeparam name="Ar"></typeparam>
-	/// <param name="ar"></param>
-	/// <param name="p"></param>
-	template<typename Ar>
-	void serialize(Ar& ar, const Person& p);
+	/// <returns>A json containing all the info for this person besides their relations</returns>
+	json serializeSimplePerson();
 
-	template<typename Ar>
-	void serialize(Ar& ar, Person& p);
+	/// <summary>
+	/// Converts a person from json without relations
+	/// </summary>
+	/// <param>Json representing a person without his relations</param>
+	/// <returns>A person without </returns>
+	static Person* deserializeSimplePerson(json j); 
 
 private:
 	/// Attributes
