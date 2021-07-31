@@ -175,7 +175,6 @@ json Person::serializePerson()
 	returnJson["id"] = this->id_person;
 
 	std::map<Relation, std::set<Person*>>::iterator itExtern;
-	std::set<Person*>::iterator itIntern;
 
 	// To go through the map
 	for (itExtern = this->relations.begin(); itExtern != this->relations.end(); itExtern++) {

@@ -58,7 +58,11 @@ TEST_F(PersonTest, PersonSerialize1) {
 TEST_F(PersonTest, PersonSerialize2) {
 	johnDoe->addParent(jackDoe);
 	json j = johnDoe->serializePerson();
-	std::cout << *jackDoe << std::endl << j << std::endl;
+	EXPECT_EQ(j["id"], johnDoe->getId());
+	EXPECT_EQ(j["firstname"], johnDoe->getFirstname());
+	EXPECT_EQ(j["lastname"], johnDoe->getLastname());
+	EXPECT_EQ(j["gender"], johnDoe->getGender());
+	EXPECT_EQ(j["relations"]["parent"][0], jackDoe->getId());
 }
 
 
