@@ -51,6 +51,15 @@ public:
 	/// <param name="gender">The gender of a person.</param>
 	Person(std::string firstname, std::string lastname, std::string gender);
 
+	/// <summary>
+	/// Initializes a person with an id
+	/// </summary>
+	/// <param name="id">Id of the person</param>
+	/// <param name="firstname">The firstname of the Person.</param>
+	/// <param name="lastname">The lastname of the Person.</param>
+	/// <param name="gender">The gender of a person.</param>
+	Person(unsigned int id, std::string firstname, std::string lastname, std::string gender);
+
 	// Copy Constructor
 	Person(const Person&); // Recopy
 
@@ -98,6 +107,12 @@ public:
 	void printSet(Relation relation);
 
 	/// <summary>
+	/// Gets the id of the person
+	/// </summary>
+	/// <returns>The id of the person</returns>
+	unsigned int getId();
+
+	/// <summary>
 	/// Gets the parents of this person
 	/// </summary>
 	/// <returns></returns>
@@ -131,7 +146,20 @@ public:
 	/// </summary>
 	/// <param>Json representing a person without his relations</param>
 	/// <returns>A person without </returns>
-	static Person* deserializeSimplePerson(json j); 
+	static Person* deserializeSimplePerson(json j);
+
+	/// <summary>
+	/// Serialize this person
+	/// </summary>
+	/// <returns></returns>
+	json serializePerson();
+
+	/// <summary>
+	/// Returns a person from a json
+	/// </summary>
+	/// <param name="j">Json representing a person</param>
+	/// <returns></returns>
+	static Person* deserializePerson(json j);
 
 private:
 	/// Attributes

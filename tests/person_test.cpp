@@ -55,6 +55,13 @@ TEST_F(PersonTest, PersonSerialize1) {
 	EXPECT_EQ(j["gender"], johnDoe->getGender());
 }
 
+TEST_F(PersonTest, PersonSerialize2) {
+	johnDoe->addParent(jackDoe);
+	json j = johnDoe->serializePerson();
+	std::cout << *jackDoe << std::endl << j << std::endl;
+}
+
+
 TEST_F(PersonTest, PersonDeserialize1) {
 	Person* p = Person::deserializeSimplePerson(jsonJohnDoe);
 	EXPECT_EQ(jsonJohnDoe["firstname"], p->getFirstname());
@@ -62,7 +69,7 @@ TEST_F(PersonTest, PersonDeserialize1) {
 	EXPECT_EQ(jsonJohnDoe["gender"], p->getGender());
 }
 
-TEST_F(PersonTest, PersonSerDeSimplePerson1) {
+TEST_F(PersonTest, PersonSerDePerson1) {
 	json j = johnDoe->serializeSimplePerson();
 	Person* p = Person::deserializeSimplePerson(j);
 	EXPECT_EQ(p->getFirstname(), johnDoe->getFirstname());

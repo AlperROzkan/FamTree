@@ -8,6 +8,7 @@ Person::~Person()
 {
 	firstname.erase(firstname.begin(), firstname.end());
 	lastname.erase(lastname.begin(), lastname.end());
+	gender.erase(gender.begin(), gender.end());
 }
 
 Person::Person(std::string firstname, std::string lastname, Gender gender)
@@ -26,13 +27,22 @@ Person::Person(std::string firstname, std::string lastname, Gender gender)
 		this->gender = "other";
 		break;
 	}
-	//this->relations = std::map<Relation, std::set<Person>>();
 	this->id_person = id;
 	id++;
 }
 
 Person::Person(std::string firstname, std::string lastname, std::string gender)
 {
+	this->firstname = firstname;
+	this->lastname = lastname;
+	this->gender = gender;
+	this->id_person = id;
+	id++;
+}
+
+Person::Person(unsigned int id, std::string firstname, std::string lastname, std::string gender)
+{
+	this->id_person = id;
 	this->firstname = firstname;
 	this->lastname = lastname;
 	this->gender = gender;
@@ -73,6 +83,7 @@ Person& Person::operator=(Person&& otherPerson) noexcept
 std::ostream& operator<<(std::ostream& os, Person& person)
 {
 	os << "----" << std::endl;
+	os << "id : " << person.id_person << std::endl;
 	os << "firstname : " << person.firstname << std::endl;
 	os << "lastname : " << person.lastname << std::endl;
 	os << "gender : " << person.gender << std::endl;
@@ -118,6 +129,11 @@ void Person::printSet(Relation relation) {
 	}
 }
 
+unsigned int Person::getId()
+{
+	return this->id_person;
+}
+
 std::set<Person*> Person::getParents() {
 	return this->getSpecificRelation(Relation::parent);
 }
@@ -150,6 +166,45 @@ json Person::serializeSimplePerson()
 Person* Person::deserializeSimplePerson(json j)
 {
 	return new Person(j["firstname"].get<std::string>(), j["lastname"].get<std::string>(), j["gender"].get<std::string>());
+}
+
+json Person::serializePerson()
+{
+	json j_set;
+	json returnJson = this->serializeSimplePerson();
+	returnJson["id"] = this->id_person;
+
+	std::map<Relation, std::set<Person*>>::iterator itExtern;
+	std::set<Person*>::iterator itIntern;
+
+	// To go through the map
+	for (itExtern = this->relations.begin(); itExtern != this->relations.end(); itExtern++) {
+		// To go through the set
+		for (auto person: itExtern->second) {
+			j_set.push_back(person->getId());
+		}
+
+		switch (itExtern->first)
+		{
+		case Relation::parent:
+			returnJson["relations"]["parent"] = j_set;
+			break;
+		case Relation::child:
+			returnJson["relations"]["child"] = j_set;
+			break;
+		case Relation::spouse:
+			returnJson["relations"]["spouse"] = j_set;
+			break;
+		default:
+			break;
+		}
+	}
+	return returnJson;
+}
+
+Person* Person::deserializePerson(json j)
+{
+	return new Person(j[id].get<unsigned int>(), j["firstname"].get<std::string>(), j["lastname"].get<std::string>(), j["gender"].get<std::string>());
 }
 
 void Person::addRelation(Relation relation, Person* person) {
