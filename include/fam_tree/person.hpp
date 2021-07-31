@@ -80,7 +80,7 @@ public:
 	std::string getGender();
 
 	// Relations getter
-	std::map<Relation, std::set<Person*>> getRelations();
+	std::map<Relation, std::set<int>> getRelations();
 
 	/// <summary>
 	/// Adds a father to this person 
@@ -101,12 +101,6 @@ public:
 	void addSpouse(Person* person);
 
 	/// <summary>
-	/// Prints the sets concerned
-	/// </summary>
-	/// <param name="relation">The relation whose set must prints</param>
-	void printSet(Relation relation);
-
-	/// <summary>
 	/// Gets the id of the person
 	/// </summary>
 	/// <returns>The id of the person</returns>
@@ -116,19 +110,19 @@ public:
 	/// Gets the parents of this person
 	/// </summary>
 	/// <returns></returns>
-	std::set<Person*> getParents();
+	std::set<int> getParents();
 
 	/// <summary>
 	/// Gets the children of this person 
 	/// </summary>
 	/// <returns></returns>
-	std::set<Person*> getChildren();
+	std::set<int> getChildren();
 
 	/// <summary>
 	/// Gets the spouse of this person
 	/// </summary>
 	/// <returns></returns>
-	std::set<Person*> getSpouse();
+	std::set<int> getSpouse();
 
 	/// <summary>
 	/// Prints a person 
@@ -166,7 +160,7 @@ private:
 	std::string firstname;
 	std::string lastname;
 	std::string gender; // a person can specify the gender themselves, or can choose it from a list
-	std::map<Relation, std::set<Person*>> relations;
+	std::map<Relation, std::set<int>> relations;
 
 	/// Methods
 
@@ -174,14 +168,14 @@ private:
 	/// Adds a relation with a person to this person
 	/// </summary>
 	/// <param name="relation">The relationship with the person</param>
-	/// <param name="person">The person linked to this person</param>
-	void addRelation(Relation relation, Person* person);
+	/// <param name="person">The number linked to this person</param>
+	void addRelation(Relation relation, unsigned int person);
 
 	/// <summary>
 	/// Gets the specific relation of this person
 	/// </summary>
 	/// <returns>A set containing the specific relation of this person</returns>
-	std::set<Person*> getSpecificRelation(Relation relation);
+	std::set<int> getSpecificRelation(Relation relation);
 };
 
 #endif // !PERSON_HPP
