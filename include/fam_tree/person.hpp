@@ -17,6 +17,7 @@
 
 #include "gender.hpp"
 #include "relation.hpp"
+#include "utils.hpp"
 
 namespace fs = std::filesystem;
 using json = nlohmann::json;
@@ -66,20 +67,50 @@ public:
 	// Move Constructor
 	Person(Person&&) noexcept; // Move
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	Person& operator=(const Person&);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	Person& operator=(Person&&) noexcept;
+
+	/// <summary>
+	/// The operator to print the person
+	/// </summary>
+	/// <param name="os">The buffer to print to</param>
+	/// <param name="person">The person to print</param>
+	/// <returns>The stream where the person will be printed</returns>
 	friend std::ostream& operator<<(std::ostream& os, Person& person);
 
-	// Firstname getter
+	/// <summary> 
+	/// Firstname getter
+	/// </summary>
+	/// <returns>The firstname of the person</returns>
 	std::string getFirstname();
 
-	// Lastname getter
+	/// <summary>
+	/// Lastname getter
+	/// </summary>
+	/// <returns>The lastname of the person</returns>
 	std::string getLastname();
 
-	// Gender getter
+	/// <summary>
+	/// Gender getter
+	/// </summary>
+	/// <returns></returns>
 	std::string getGender();
 
-	// Relations getter
+	/// <summary>
+	/// Relations getter
+	/// </summary>
+	/// <returns>The relations of the person</returns>
 	std::map<Relation, std::set<int>> getRelations();
 
 	/// <summary>

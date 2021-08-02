@@ -196,7 +196,19 @@ json Person::serializePerson()
 
 Person* Person::deserializePerson(json j)
 {
-	return new Person(j[id].get<unsigned int>(), j["firstname"].get<std::string>(), j["lastname"].get<std::string>(), j["gender"].get<std::string>());
+	Person* returnPerson = new Person(
+		j["id"].get<unsigned int>(),
+		j["firstname"].get<std::string>(),
+		j["lastname"].get<std::string>(),
+		j["gender"].get<std::string>());
+	json relations = j["relations"];
+	for (json::iterator it = relations.begin(); it != relations.end(); ++it) {
+		for each (auto var in it.value())
+		{
+			returnPerson->addRelation(famTree::convertToRelationEnum(it.key()), var);
+		}
+	}
+	return returnPerson;
 }
 
 void Person::addRelation(Relation relation, unsigned int person) {

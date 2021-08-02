@@ -2,6 +2,7 @@
 add_library(
 	fam_tree 
 	"../../src/person.cpp"
+	"../../src/utils.cpp"
 )
 
 # share lib

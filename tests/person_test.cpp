@@ -14,13 +14,17 @@ protected:
 	json jsonJohnDoe;
 
 	virtual void SetUp() override {
+		jsonJohnDoe["id"] = 420;
 		jsonJohnDoe["firstname"] = "John";
 		jsonJohnDoe["lastname"] = "Doe";
 		jsonJohnDoe["gender"] = "Male";
 	}
 
 	virtual void TearDown() override {
-
+		delete johnDoe;
+		delete jackDoe;
+		delete janePoe;
+		delete paulDoe;
 	}
 };
 
@@ -63,6 +67,7 @@ TEST_F(PersonTest, PersonSerialize2) {
 	EXPECT_EQ(j["lastname"], johnDoe->getLastname());
 	EXPECT_EQ(j["gender"], johnDoe->getGender());
 	EXPECT_EQ(j["relations"]["parent"][0], jackDoe->getId());
+
 }
 
 
@@ -71,6 +76,15 @@ TEST_F(PersonTest, PersonDeserialize1) {
 	EXPECT_EQ(jsonJohnDoe["firstname"], p->getFirstname());
 	EXPECT_EQ(jsonJohnDoe["lastname"], p->getLastname());
 	EXPECT_EQ(jsonJohnDoe["gender"], p->getGender());
+}
+
+TEST_F(PersonTest, PersonDeserialize2) {
+	jsonJohnDoe["relations"]["child"] = {42};
+	Person* p = Person::deserializePerson(jsonJohnDoe);
+	EXPECT_EQ(jsonJohnDoe["firstname"], p->getFirstname());
+	EXPECT_EQ(jsonJohnDoe["lastname"], p->getLastname());
+	EXPECT_EQ(jsonJohnDoe["gender"], p->getGender());
+	EXPECT_TRUE(p->getChildren().contains(42));
 }
 
 TEST_F(PersonTest, PersonSerDePerson1) {
