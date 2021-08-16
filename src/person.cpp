@@ -172,7 +172,7 @@ json Person::serializePerson()
 	// To go through the map
 	for (itExtern = this->relations.begin(); itExtern != this->relations.end(); itExtern++) {
 		// To go through the set
-		for (auto person: itExtern->second) {
+		for (auto person : itExtern->second) {
 			j_set.push_back(person);
 		}
 
@@ -196,13 +196,19 @@ json Person::serializePerson()
 
 Person* Person::deserializePerson(json j)
 {
+	// The reference of the person to return at the end of the function
 	Person* returnPerson = new Person(
 		j["id"].get<unsigned int>(),
 		j["firstname"].get<std::string>(),
 		j["lastname"].get<std::string>(),
 		j["gender"].get<std::string>());
+
+	// Register the relations of the person in a json for better handling
 	json relations = j["relations"];
+
+	// Go through each of the relation 
 	for (json::iterator it = relations.begin(); it != relations.end(); ++it) {
+		// Go through each of the ids of the people in the relation
 		for each (auto var in it.value())
 		{
 			returnPerson->addRelation(famTree::convertToRelationEnum(it.key()), var);

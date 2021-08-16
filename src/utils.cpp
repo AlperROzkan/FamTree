@@ -9,3 +9,31 @@ Relation famTree::convertToRelationEnum(std::string enumStr)
 
 	return Relation::error;
 }
+
+/*
+void famTree::serializeToFile(std::vector<Person*> people, fs::path pathToFile)
+{
+	std::ofstream myFile;
+	myFile.open(pathToFile);
+	myFile << "aaaaaaaaa\n";
+	myFile.close();
+}
+*/
+
+void famTree::writeToFile(std::string message, fs::path pathToFile)
+{
+	std::ofstream fileToWriteIn(pathToFile);
+	fileToWriteIn << message;
+	fileToWriteIn.close();
+}
+
+std::string famTree::readFromFile(fs::path path)
+{
+	std::ifstream input_file(path);
+	if (!input_file.is_open()) {
+		std::cerr << "Could not open the file - '"
+			<< path << "'" << std::endl;
+		exit(EXIT_FAILURE);
+	}
+	return std::string((std::istreambuf_iterator<char>(input_file)), std::istreambuf_iterator<char>());
+}

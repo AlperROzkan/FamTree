@@ -12,6 +12,7 @@ target_include_directories(
 	"./"
 )
 
+# link fam_tree to other libraries
 target_link_libraries(
 	fam_tree 
 	PRIVATE 
