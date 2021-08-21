@@ -18,6 +18,7 @@
 
 #include "gender.hpp"
 #include "relation.hpp"
+#include "utils.hpp"
 
 namespace fs = std::filesystem;
 using json = nlohmann::json;

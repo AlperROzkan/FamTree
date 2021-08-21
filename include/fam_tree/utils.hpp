@@ -10,7 +10,7 @@
 #include <fstream>
 #include <sstream>
 #include <filesystem>
-#include <person.hpp>
+#include "person.hpp"
 
 namespace fs = std::filesystem;
 
@@ -28,7 +28,7 @@ namespace famTree {
 	/// </summary>
 	/// <param name="people">The vector of people to serialize into a file</param>
 	/// <param name="pathToFile">The path to the file to save the people to</param>
-	void serializeToFile(std::vector<Person*> people, fs::path pathToFile);
+	// void serializeToFile(std::vector<Person*> people, fs::path pathToFile);
 
 	/// <summary>
 	/// Write a string to a file

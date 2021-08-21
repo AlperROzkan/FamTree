@@ -211,7 +211,7 @@ Person* Person::deserializePerson(json j)
 		// Go through each of the ids of the people in the relation
 		for each (auto var in it.value())
 		{
-			//returnPerson->addRelation(famTree::convertToRelationEnum(it.key()), var);
+			returnPerson->addRelation(famTree::convertToRelationEnum(it.key()), var);
 		}
 	}
 	return returnPerson;

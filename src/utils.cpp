@@ -10,6 +10,7 @@ Relation famTree::convertToRelationEnum(std::string enumStr)
 	return Relation::error;
 }
 
+/*
 void famTree::serializeToFile(std::vector<Person*> people, fs::path pathToFile)
 {
 	json jsonOfVector;
@@ -28,7 +29,7 @@ void famTree::serializeToFile(std::vector<Person*> people, fs::path pathToFile)
 	
 	myFile.close();
 }
-
+*/
 void famTree::writeToFile(std::string message, fs::path pathToFile)
 {
 	std::ofstream fileToWriteIn(pathToFile);
