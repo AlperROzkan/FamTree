@@ -15,7 +15,7 @@ target_include_directories(
 # link fam_tree to other libraries
 target_link_libraries(
 	fam_tree 
-	PRIVATE 
+	PUBLIC 
 	nlohmann_json::nlohmann_json
 )
 

@@ -13,11 +13,11 @@
 #include <string>
 #include <variant>
 #include <filesystem>
-#include <nlohmann/json.hpp>
+#include <person.hpp>
+#include <nlohmann\json.hpp>
 
 #include "gender.hpp"
 #include "relation.hpp"
-#include "utils.hpp"
 
 namespace fs = std::filesystem;
 using json = nlohmann::json;
@@ -27,7 +27,6 @@ class Person
 public:
 	/// Attributes
 	static unsigned int id; // static id to keep track of the number of people
-	unsigned int id_person; // id of the person
 
 	/// Methods
 	// Default constructor
@@ -188,6 +187,7 @@ public:
 
 private:
 	/// Attributes
+	unsigned int id_person; // id of the person
 	std::string firstname;
 	std::string lastname;
 	std::string gender; // a person can specify the gender themselves, or can choose it from a list

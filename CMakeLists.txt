@@ -43,9 +43,13 @@ add_subdirectory("./include/fam_tree/")
 add_subdirectory(apps)
 
 # Tests here
-include(CTest)
-include(GoogleTest)
-add_subdirectory("./extern/googletest")
-add_subdirectory(tests)
+option(PACKAGE_TESTS "Build the tests" ON)
+if(PACKAGE_TESTS)
+    enable_testing()
+    include(GoogleTest)
+	add_subdirectory(tests)
+endif()
+
+
 
 
