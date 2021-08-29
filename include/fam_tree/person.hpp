@@ -28,6 +28,7 @@ class Person
 public:
 	/// Attributes
 	static unsigned int id; // static id to keep track of the number of people
+	static std::set<Person*> peopleHolder; // registers every new person
 
 	/// Methods
 	// Default constructor
@@ -185,6 +186,19 @@ public:
 	/// <param name="j">Json representing a person</param>
 	/// <returns></returns>
 	static Person* deserializePerson(json j);
+
+	/// <summary>
+	/// Serialize the people to a file
+	/// </summary>
+	/// <param name="pathToFile">The path to the file to save the people to</param>
+	static void serializeToFile(fs::path pathToFile);
+
+	/// <summary>
+	/// Deserialize the people from a file
+	/// </summary>
+	/// <param name="pathToFile">The path to the file to recuperate the people from</param>
+	/// <returns>A set of people to instanciate the people from</returns>
+	static std::set<Person*> deserializeFromFile(fs::path pathToFile);
 
 private:
 	/// Attributes

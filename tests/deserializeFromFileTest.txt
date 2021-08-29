@@ -1,0 +1,28 @@
+{
+    "people": [
+        {
+            "firstname": "John",
+            "gender": "male",
+            "id": 0,
+            "lastname": "Doe"
+        },
+        {
+            "firstname": "Eliott",
+            "gender": "male",
+            "id": 3,
+            "lastname": "Doe"
+        },
+        {
+            "firstname": "Helen",
+            "gender": "female",
+            "id": 1,
+            "lastname": "Smith"
+        },
+        {
+            "firstname": "Paul",
+            "gender": "male",
+            "id": 2,
+            "lastname": "Doe"
+        }
+    ]
+}

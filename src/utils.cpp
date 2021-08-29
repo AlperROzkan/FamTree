@@ -10,26 +10,6 @@ Relation famTree::convertToRelationEnum(std::string enumStr)
 	return Relation::error;
 }
 
-/*
-void famTree::serializeToFile(std::vector<Person*> people, fs::path pathToFile)
-{
-	json jsonOfVector;
-
-	std::ofstream myFile;
-	myFile.open(pathToFile);
-	size_t peopleCounter = 0;
-
-	for each (Person* person in people)
-	{	
-		jsonOfVector["people"][peopleCounter] = person->serializePerson();
-		peopleCounter++;
-	}
-
-	std::cout << jsonOfVector;
-	
-	myFile.close();
-}
-*/
 void famTree::writeToFile(std::string message, fs::path pathToFile)
 {
 	std::ofstream fileToWriteIn(pathToFile);

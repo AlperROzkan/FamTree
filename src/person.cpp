@@ -2,10 +2,12 @@
 
 Person::Person() : Person("John", "Doe", Gender::other)
 {
+	Person::peopleHolder.insert(this);
 }
 
 Person::~Person()
 {
+	Person::peopleHolder.erase(this);
 	firstname.erase(firstname.begin(), firstname.end());
 	lastname.erase(lastname.begin(), lastname.end());
 	gender.erase(gender.begin(), gender.end());
@@ -29,6 +31,7 @@ Person::Person(std::string firstname, std::string lastname, Gender gender)
 	}
 	this->id_person = id;
 	id++;
+	Person::peopleHolder.insert(this);
 }
 
 Person::Person(std::string firstname, std::string lastname, std::string gender)
@@ -38,6 +41,7 @@ Person::Person(std::string firstname, std::string lastname, std::string gender)
 	this->gender = gender;
 	this->id_person = id;
 	id++;
+	Person::peopleHolder.insert(this);
 }
 
 Person::Person(unsigned int id, std::string firstname, std::string lastname, std::string gender)
@@ -46,6 +50,7 @@ Person::Person(unsigned int id, std::string firstname, std::string lastname, std
 	this->firstname = firstname;
 	this->lastname = lastname;
 	this->gender = gender;
+	Person::peopleHolder.insert(this);
 }
 
 Person::Person(const Person& otherPerson)
@@ -53,6 +58,7 @@ Person::Person(const Person& otherPerson)
 	firstname = otherPerson.firstname;
 	lastname = otherPerson.lastname;
 	gender = otherPerson.gender;
+	Person::peopleHolder.insert(this);
 }
 
 Person::Person(Person&& otherPerson) noexcept
@@ -60,6 +66,7 @@ Person::Person(Person&& otherPerson) noexcept
 	firstname = std::move(otherPerson.firstname);
 	lastname = std::move(otherPerson.lastname);
 	gender = std::move(otherPerson.gender);
+	Person::peopleHolder.insert(this);
 }
 
 Person& Person::operator=(const Person& otherPerson)
@@ -215,6 +222,44 @@ Person* Person::deserializePerson(json j)
 		}
 	}
 	return returnPerson;
+}
+
+void Person::serializeToFile(fs::path pathToFile)
+{
+	json jsonOfSet; // tmp json 
+
+	std::ofstream myFile;
+	myFile.open(pathToFile);
+	size_t peopleCounter = 0; // counter to add people inside the json
+
+	// put every person in the people holder variable inside a json
+	for each (Person * person in Person::peopleHolder)
+	{
+		jsonOfSet["people"][peopleCounter] = person->serializePerson();
+		peopleCounter++;
+	}
+
+	// write the json inside the designated file
+	// std::cout << jsonOfSet;
+	famTree::writeToFile(jsonOfSet.dump(4), pathToFile);
+
+	myFile.close();
+}
+
+std::set<Person*> Person::deserializeFromFile(fs::path pathToFile) {
+	json jsonFromFile;
+	std::set<Person*> returnSet;
+
+	std::ofstream myFile;
+
+	jsonFromFile = json::parse(famTree::readFromFile(pathToFile));
+
+	for each (auto var in jsonFromFile["people"])
+	{
+		// There is a dump() on gender to specify that the gender is a string type instead of an 
+		returnSet.insert(new Person(var["firstname"], var["lastname"], var["gender"].dump()));
+	}
+	return returnSet;
 }
 
 void Person::addRelation(Relation relation, unsigned int person) {

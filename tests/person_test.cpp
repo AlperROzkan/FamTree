@@ -2,18 +2,26 @@
 #include <iostream>
 #include <set>
 #include <person.hpp>
+#include <utils.hpp>
 
 unsigned int Person::id = 0;
+std::set<Person*> Person::peopleHolder;
 
 class PersonTest : public testing::Test {
 protected:
-	Person* johnDoe = new Person("John", "Doe", Gender::other);
-	Person* jackDoe = new Person("Jack", "Doe", Gender::male);
-	Person* janePoe = new Person("Jane", "Poe", Gender::female);
-	Person* paulDoe = new Person("Paul", "Poe", Gender::male);
+	Person* johnDoe;
+	Person* jackDoe;
+	Person* janePoe;
+	Person* paulDoe;
 	json jsonJohnDoe;
 
 	virtual void SetUp() override {
+		Person::id = 0;
+		johnDoe = new Person("John", "Doe", Gender::other);
+		jackDoe = new Person("Jack", "Doe", Gender::male);
+		janePoe = new Person("Jane", "Poe", Gender::female);
+		paulDoe = new Person("Paul", "Poe", Gender::male);
+
 		jsonJohnDoe["id"] = 420;
 		jsonJohnDoe["firstname"] = "John";
 		jsonJohnDoe["lastname"] = "Doe";
@@ -75,6 +83,7 @@ TEST_F(PersonTest, personDeserialize1) {
 	EXPECT_EQ(jsonJohnDoe["firstname"], p->getFirstname());
 	EXPECT_EQ(jsonJohnDoe["lastname"], p->getLastname());
 	EXPECT_EQ(jsonJohnDoe["gender"], p->getGender());
+	delete p;
 }
 
 TEST_F(PersonTest, personDeserialize2) {
@@ -84,6 +93,7 @@ TEST_F(PersonTest, personDeserialize2) {
 	EXPECT_EQ(jsonJohnDoe["lastname"], p->getLastname());
 	EXPECT_EQ(jsonJohnDoe["gender"], p->getGender());
 	EXPECT_TRUE(p->getChildren().contains(42));
+	delete p;
 }
 
 TEST_F(PersonTest, personSerDePerson1) {
@@ -92,4 +102,32 @@ TEST_F(PersonTest, personSerDePerson1) {
 	EXPECT_EQ(p->getFirstname(), johnDoe->getFirstname());
 	EXPECT_EQ(p->getLastname(), johnDoe->getLastname());
 	EXPECT_EQ(p->getGender(), johnDoe->getGender());
+	delete p;
+}
+
+/// TODO
+TEST(PersonToFileTest, personSerializeToFile1) {
+	// Initialize the test crowd
+	Person::id = 0;
+	Person* john = new Person("John", "Doe", Gender::male);
+	Person* helen = new Person("Helen", "Smith", Gender::female);
+	Person* paul = new Person("Paul", "Doe", Gender::male);
+	Person* eliott = new Person("Eliott", "Doe", Gender::male);
+
+	// Serialize them to file
+	fs::path pathToTestFile = fs::path(PROJECT_PATH) /= "tests/serializeToFileTest.txt";
+	Person::serializeToFile(pathToTestFile);
+
+	// Delete the test crowd
+	delete john;
+	delete helen;
+	delete paul;
+	delete eliott;
+}
+
+/// TODO
+TEST(PersonToFileTest, personDeserializeFromFile) {
+	Person::id = 0;
+	fs::path pathToTestFile = fs::path(PROJECT_PATH) /= "tests/deserializeFromFileTest.txt";
+	std::set<Person*> testSet = Person::deserializeFromFile(pathToTestFile);
 }

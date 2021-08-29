@@ -7,27 +7,15 @@
 
 namespace fs = std::filesystem;
 unsigned int Person::id = 0;
+std::set<Person*> Person::peopleHolder;
 
 
 class UtilsTest : public testing::Test {
 protected:
-	Person* john;
-	Person* helen;
-	Person* paul;
-	Person* eliott;
-
 	virtual void SetUp() override {
-		john = new Person("John", "Doe", Gender::male);
-		helen = new Person("Helen", "Smith", Gender::female);
-		paul = new Person("Paul", "Doe", Gender::male);
-		eliott = new Person("Eliott", "Doe", Gender::male);
 	}
 
 	virtual void TearDown() override {
-		delete john;
-		delete helen;
-		delete paul;
-		delete eliott;
 	}
 };
 
@@ -46,7 +34,4 @@ TEST_F(UtilsTest, writeToFile1) {
 	fs::path pathToTestFile = fs::path(PROJECT_PATH) /= "tests/writeToFile.txt";
 	famTree::writeToFile(messageToWrite, pathToTestFile);
 	EXPECT_EQ(messageToWrite, famTree::readFromFile(pathToTestFile));
-}
-
-TEST_F(UtilsTest, serializeToFile1) {
 }
