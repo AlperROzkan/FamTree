@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include <set>
+#include <vector>
 #include <person.hpp>
 #include <utils.hpp>
 
@@ -123,11 +124,19 @@ TEST(PersonToFileTest, personSerializeToFile1) {
 	delete helen;
 	delete paul;
 	delete eliott;
+
+	FAIL() << "Not implemented";
 }
 
 /// TODO
 TEST(PersonToFileTest, personDeserializeFromFile) {
 	Person::id = 0;
+
+	// firstnames, lastnames, and genders to test in order
+	std::vector<std::string> firstnames = { "John", "Eliott", "Helen", "Paul" };
+	std::vector<std::string> lastnames = { "Doe", "Doe", "Smith", "Doe" };
+
 	fs::path pathToTestFile = fs::path(PROJECT_PATH) /= "tests/deserializeFromFileTest.txt";
 	std::set<Person*> testSet = Person::deserializeFromFile(pathToTestFile);
+	FAIL() << "Not Implemented";
 }

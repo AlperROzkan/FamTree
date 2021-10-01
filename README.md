@@ -10,4 +10,4 @@ A genealogy tree manager
 
 ## Other projects used
 * Google Test: https://github.com/google/googletest.git
-* Yet Another Serialisation: https://github.com/nixman/yas
+* nlohmann json : https://github.com/nlohmann/json

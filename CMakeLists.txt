@@ -1,12 +1,30 @@
 cmake_minimum_required(VERSION 3.17...3.20)
 
-# Project description
+########################################
+### Project description
+########################################
+
 project(
 	FamTree 
 	VERSION 0.1.0
 	DESCRIPTION "Family genealogy management with cpp"
 	LANGUAGES CXX
 )
+
+########################################
+### Setup
+########################################
+
+include(CheckIPOSupported)
+include(CMakePackageConfigHelpers)
+include(InstallRequiredSystemLibraries)
+include(FetchContent)
+include(GNUInstallDirs)
+include(CTest)
+
+find_package(Git)
+find_package(Doxygen)
+
 
 # Cmake configuration
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -22,7 +40,9 @@ find_package(Qt6 COMPONENTS Core)
 find_package(Qt6 COMPONENTS Gui)
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
-# Includes
+########################################
+### Includes
+########################################
 set(INCLUDE_DIR
 	"/include/"
 )
