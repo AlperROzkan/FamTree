@@ -13,12 +13,11 @@
 #include <string>
 #include <variant>
 #include <filesystem>
-#include <person.hpp>
+#include "utils.hpp"
 #include <nlohmann\json.hpp>
 
 #include "gender.hpp"
 #include "relation.hpp"
-#include "utils.hpp"
 
 namespace fs = std::filesystem;
 using json = nlohmann::json;
