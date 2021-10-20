@@ -45,20 +45,20 @@ TEST_F(PersonTest, personInstanciate1) {
 
 TEST_F(PersonTest, personAddParent1) {
 	johnDoe->addParent(jackDoe);
-	EXPECT_TRUE(johnDoe->getParents().contains(jackDoe->getId()));
-	EXPECT_TRUE(jackDoe->getChildren().contains(johnDoe->getId()));
+	EXPECT_TRUE(johnDoe->getParents().count(jackDoe->getId()));
+	EXPECT_TRUE(jackDoe->getChildren().count(johnDoe->getId()));
 }
 
 TEST_F(PersonTest, personAddChildren1) {
 	janePoe->addChild(paulDoe);
-	EXPECT_TRUE(janePoe->getChildren().contains(paulDoe->getId()));
-	EXPECT_TRUE(paulDoe->getParents().contains(janePoe->getId()));
+	EXPECT_TRUE(janePoe->getChildren().count(paulDoe->getId()));
+	EXPECT_TRUE(paulDoe->getParents().count(janePoe->getId()));
 }
 
 TEST_F(PersonTest, personAddSpouse1) {
 	janePoe->addSpouse(johnDoe);
-	EXPECT_TRUE(johnDoe->getSpouse().contains(janePoe->getId()));
-	EXPECT_TRUE(janePoe->getSpouse().contains(johnDoe->getId()));
+	EXPECT_TRUE(johnDoe->getSpouse().count(janePoe->getId()));
+	EXPECT_TRUE(janePoe->getSpouse().count(johnDoe->getId()));
 }
 
 TEST_F(PersonTest, personSerialize1) {
@@ -93,7 +93,7 @@ TEST_F(PersonTest, personDeserialize2) {
 	EXPECT_EQ(jsonJohnDoe["firstname"], p->getFirstname());
 	EXPECT_EQ(jsonJohnDoe["lastname"], p->getLastname());
 	EXPECT_EQ(jsonJohnDoe["gender"], p->getGender());
-	EXPECT_TRUE(p->getChildren().contains(42));
+	EXPECT_TRUE(p->getChildren().count(42));
 	delete p;
 }
 
