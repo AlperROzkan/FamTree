@@ -2,9 +2,6 @@
 #ifndef PERSON_HPP
 #define PERSON_HPP
 
-
-#pragma once
-
 #include <string>
 #include <iostream>
 #include <algorithm>
