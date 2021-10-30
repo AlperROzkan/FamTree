@@ -1,4 +1,5 @@
 #include "../include/view/mainwindow.h"
+#include "../include/view/addEditWindow.h"
 #include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -27,7 +28,9 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 void MainWindow::ButtonAddPerson() {
-    
+    AddEditWindow addEditWindow;
+    addEditWindow.setModal(true);
+    addEditWindow.exec();
 }
 
 void MainWindow::ButtonDeletePerson() {

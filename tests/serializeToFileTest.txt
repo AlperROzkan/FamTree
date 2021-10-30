@@ -7,10 +7,10 @@
             "lastname": "Doe"
         },
         {
-            "firstname": "Helen",
-            "gender": "female",
-            "id": 1,
-            "lastname": "Smith"
+            "firstname": "Eliott",
+            "gender": "male",
+            "id": 3,
+            "lastname": "Doe"
         },
         {
             "firstname": "Paul",
@@ -19,10 +19,10 @@
             "lastname": "Doe"
         },
         {
-            "firstname": "Eliott",
-            "gender": "male",
-            "id": 3,
-            "lastname": "Doe"
+            "firstname": "Helen",
+            "gender": "female",
+            "id": 1,
+            "lastname": "Smith"
         }
     ]
 }

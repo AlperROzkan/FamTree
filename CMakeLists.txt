@@ -78,11 +78,18 @@ target_link_libraries(
 ### Qt set up 
 ########################################
 
+set(VIEW_SOURCES
+	${PROJECT_SOURCE_DIR}/app/mainwindow.ui
+	${PROJECT_SOURCE_DIR}/app/addEditWindow.ui
+)
+
 set(PROJECT_SOURCES
         ${PROJECT_SOURCE_DIR}/app/main.cpp
         ${PROJECT_SOURCE_DIR}/app/mainwindow.cpp
+		${PROJECT_SOURCE_DIR}/app/addEditWindow.cpp
         ${PROJECT_SOURCE_DIR}/include/view/mainwindow.h
-        ${PROJECT_SOURCE_DIR}/app/mainwindow.ui
+		${PROJECT_SOURCE_DIR}/include/view/addEditWindow.h
+        ${VIEW_SOURCES}
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
